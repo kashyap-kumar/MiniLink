@@ -15,8 +15,16 @@ async function handleGenerateNewShortURL(req, res) {
         visitHistory: []
     })
 
-    return res.json({ id: shortId });
+    const allUrls = await URL.find({});
+
+    return res.render("home", { id: shortId, urls: allUrls });
+    // return res.json({ id: shortId });
 }
+
+function handleDirectAccess(req, res) {
+    // Send a 405 Method Not Allowed status code
+    res.status(405).send("Method Not Allowed");
+};
 
 // for analytics
 async function handleGetAnalytics(req, res) {
@@ -30,5 +38,6 @@ async function handleGetAnalytics(req, res) {
 
 module.exports = {
     handleGenerateNewShortURL,
+    handleDirectAccess,
     handleGetAnalytics
 }

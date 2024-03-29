@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Home</title>
+</head>
+
+<body>
+    <h1>MiniLink - URL Shortener</h1>
+
+    <% if (locals.id) { %>
+        <p id="newUrlMessage">URL generated: <a href="http://localhost:3000/<%= id %>">http://localhost:3000/<%= id %></a></p>
+    <% } %>
+
+    <form method="POST" action="/url">
+        <input type="url" name="url" placeholder="e.g. www.google.com">
+        <button type="submit">Generate</button>
+    </form>
+
+    <% if (locals.urls) { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Serial no.</th>
+                    <th>Short URL</th>
+                    <th>Redirect URL</th>
+                    <th>Visits</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% urls.forEach((url, index) => { %>
+                    <tr>
+                        <td><%= index + 1 %></td>
+                        <td><a href="http://localhost:3000/<%= url.shortId %>">http://localhost:3000/<%= url.shortId %></a></td>
+                        <td><a href="<%= url.redirectURL %>"><%= url.redirectURL %></a></td>
+                        <td><%= url.visitHistory.length %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } %>
+</body>
+
+</html>

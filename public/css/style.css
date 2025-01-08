@@ -46,7 +46,7 @@ form input, form button {
     outline: none;
     background-color: #091424;
     border-radius: 4px;
-    margin: 10px;
+    margin: 10px 0;
     padding: 15px 20px;
 }
 form button {
